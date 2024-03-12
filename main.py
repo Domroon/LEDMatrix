@@ -75,9 +75,29 @@ class Matrix:
         self.np.write()
         time.sleep(duration)
         
-     def color_changing(self, current_color, fade_to_color, max_brightness):
-        # copy from fade in and add a second color! to change these two
-        # colors at the same time, the one in reverse and the other not reversed
+    def color_changing(self, current_color, fade_to_color, steps, duration):
+        step_duration = duration/steps
+        loops = 0
+        mixed_color = [0, 0, 0]
+        for i in range(3):
+            if fade_to_color[i] > 0:
+                fade_to_color[i] = 1
+        print("first: ", fade_to_color)
+        while True:
+            if loops == steps:
+                break
+            for i in range(3):
+                if fade_to_color[i] > 0:
+                    fade_to_color[i] += 1
+                elif current_color[i] > 0:
+                    current_color[i] -= 1
+                mixed_color[i] = current_color[i] + fade_to_color[i]
+            print(mixed_color)
+            for i in range(0, LED_QTY):
+                self.np[i] = mixed_color
+            time.sleep(step_duration)
+            self.np.write()
+            loops = loops + 1
         
         
 def main():
@@ -86,10 +106,10 @@ def main():
     matrix = Matrix(pin, np)
     matrix.clear()
     input("Press enter for start")
-    while True:
-        matrix.fill_colorful(0.01)
+    matrix.color_changing([50, 0, 0], [0, 0, 50], 50, 5)
+    matrix.color_changing([0, 0, 50], [0, 50, 0], 50, 5)
+    matrix.color_changing([0, 50, 0], [50, 20, 0], 50, 5)
     
-    matrix.fill([20, 0, 0]) # add second fill with duration?
 
 
 if __name__ == '__main__':
