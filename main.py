@@ -99,6 +99,16 @@ class Matrix:
             self.np.write()
             loops = loops + 1
         
+    def show_one_bus_sweep(self, color, duration):
+        led_duration = duration / LED_QTY
+        print(led_duration)
+        loops = 0
+        for i in range(0, LED_QTY):
+            self.np[i] = color
+            self.np.write()
+            time.sleep(led_duration)
+            self.clear()
+        
         
 def main():
     pin = Pin(14, Pin.OUT)   # 
@@ -106,9 +116,9 @@ def main():
     matrix = Matrix(pin, np)
     matrix.clear()
     input("Press enter for start")
-    matrix.color_changing([50, 0, 0], [0, 0, 50], 50, 5)
-    matrix.color_changing([0, 0, 50], [0, 50, 0], 50, 5)
-    matrix.color_changing([0, 50, 0], [50, 20, 0], 50, 5)
+    matrix.show_one_bus_sweep([0, 0, 50], 1)
+    # matrix.show_square(0, 0, [0, 20, 0], 5)
+    # matrix.fill([10, 0, 0])
     
 
 
