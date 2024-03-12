@@ -229,9 +229,24 @@ class Matrix:
             self.np.write()
             led_num -= 1
 
-   
-        
-        
+    def tetris_line_fill(self, color, duration):
+        loop_duration = duration / LED_QTY
+        line_num = 16
+        while line_num >= 0:
+            for j in range(line_num):
+                for i in range(16):
+                    self.np[i+16*j] = color
+                self.np.write()
+                time.sleep(loop_duration)
+                for i in range(16):
+                    self.np[i+16*j] = [0, 0, 0]
+                self.np.write()
+            for i in range(16):
+                    self.np[i+16*j] = color
+            self.np.write()
+            line_num -= 1
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -261,7 +276,7 @@ def main():
     #     loop += 1
     #matrix.fill_in_pieces([0, 0, 20], 1)
     #matrix.fill_in_pieces([0, 20, 0], 1)
-    matrix.tetris_point_fill([20, 0, 0], 0.01)
+    matrix.tetris_line_fill([20, 0, 0], 1)
     
 
 
