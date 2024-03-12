@@ -4,6 +4,13 @@ from machine import Pin
 from neopixel import NeoPixel
 
 LED_QTY = 256
+COLOR = {
+    "red" : [255, 0, 0],
+    "green" : [255, 0, 0],
+    "blue" : [0, 0, 255],
+    "yellow": [255, 255, 0],
+    "white": [255, 255, 255]
+}
 
 
 class Matrix:
@@ -26,7 +33,12 @@ class Matrix:
             if loops == duration:
                 break
             rand_num = randint(0, LED_QTY - 1)
-            self.np[rand_num] = color
+            if colorful:
+                colors = ["red", "green", "blue", "yellow"]
+                rand_col = randint(0, 3)
+                self.np[rand_num] = COLOR[colors[rand_col]]
+            else:
+                self.np[rand_num] = color
             self.np.write()
             time.sleep(on_dura)
             if clear:
@@ -101,13 +113,44 @@ class Matrix:
         
     def show_one_bus_sweep(self, color, duration):
         led_duration = duration / LED_QTY
-        print(led_duration)
-        loops = 0
         for i in range(0, LED_QTY):
             self.np[i] = color
             self.np.write()
             time.sleep(led_duration)
             self.clear()
+
+    def show_square(self, x, y, color, duration, clear=True):
+        if x==0 and y==0:
+            for j in range(8):
+                for i in range(8):
+                    if j % 2 == 0:
+                        self.np[i+j*16] = color
+                    else:
+                        self.np[i+j*16 + 8] = color
+        if x == 1 and y == 0:
+            for j in range(8):
+                for i in range(8, 16):
+                    if j % 2 == 0:
+                        self.np[i+j*16] = color
+                    else:
+                        self.np[i+j*16 - 8] = color
+        if x == 1 and y == 1:
+            for j in range(8):
+                for i in range(136,144):
+                    if j % 2 == 0:
+                        self.np[i+j*16] = color
+                    else:
+                        self.np[i+j*16-8] = color
+        if x == 0 and y == 1:
+            for j in range(8):
+                for i in range(128,136):
+                    if j % 2 == 0:
+                        self.np[i+j*16] = color
+                    else:
+                        self.np[i+j*16+8] = color
+        self.np.write()
+        time.sleep(duration)
+        self.clear()
         
         
 def main():
@@ -116,8 +159,7 @@ def main():
     matrix = Matrix(pin, np)
     matrix.clear()
     input("Press enter for start")
-    matrix.show_one_bus_sweep([0, 0, 50], 1)
-    # matrix.show_square(0, 0, [0, 20, 0], 5)
+    matrix.flash_random([0, 0, 20], 10, on_dura=0.01, colorful=True)
     # matrix.fill([10, 0, 0])
     
 
