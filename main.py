@@ -6,7 +6,7 @@ from neopixel import NeoPixel
 LED_QTY = 256
 COLOR = {
     "red" : [255, 0, 0],
-    "green" : [255, 0, 0],
+    "green" : [0, 255, 0],
     "blue" : [0, 0, 255],
     "yellow": [255, 255, 0],
     "white": [255, 255, 255]
@@ -34,8 +34,8 @@ class Matrix:
                 break
             rand_num = randint(0, LED_QTY - 1)
             if colorful:
-                colors = ["red", "green", "blue", "yellow"]
-                rand_col = randint(0, 3)
+                colors = ["red", "green", "blue", "yellow", "white"]
+                rand_col = randint(0, len(colors)-1)
                 self.np[rand_num] = COLOR[colors[rand_col]]
             else:
                 self.np[rand_num] = color
@@ -159,7 +159,9 @@ def main():
     matrix = Matrix(pin, np)
     matrix.clear()
     input("Press enter for start")
-    matrix.flash_random([0, 0, 20], 10, on_dura=0.01, colorful=True)
+    matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
+    matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
+    matrix.flash_random([0, 0, 20], 2, on_dura=0.01, colorful=True)
     # matrix.fill([10, 0, 0])
     
 
