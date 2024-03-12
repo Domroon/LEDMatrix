@@ -159,7 +159,6 @@ class Matrix:
         color5 = [int(color[0]/16), int(color[1]/16), int(color[2]/16)]
         x = 0
         loop_duration = (duration / LED_QTY)
-        print(loop_duration)
         while True:
             if x == 256 - 4:
                 break
@@ -168,6 +167,27 @@ class Matrix:
             self.np[x+2] = color3
             self.np[x+3] = color2
             self.np[x+4] = color
+            self.np.write()
+            time.sleep(loop_duration)
+            x += 1
+            self.clear()
+
+    def show_comets(self, color, duration):
+        color2 = [int(color[0]/2), int(color[1]/2), int(color[2]/2)]
+        color3 = [int(color[0]/4), int(color[1]/4), int(color[2]/4)]
+        color4 = [int(color[0]/8), int(color[1]/8), int(color[2]/8)]
+        color5 = [int(color[0]/16), int(color[1]/16), int(color[2]/16)]
+        x = 0
+        loop_duration = (duration / LED_QTY)
+        while True:
+            if x == 16-4:
+                break
+            for i in range(16):
+                self.np[x+0+i*16] = color5
+                self.np[x+1+i*16] = color4
+                self.np[x+2+i*16] = color3
+                self.np[x+3+i*16] = color2
+                self.np[x+4+i*16] = color
             self.np.write()
             time.sleep(loop_duration)
             x += 1
@@ -183,9 +203,12 @@ def main():
     # matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
     # matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
     # matrix.flash_random([0, 0, 20], 2, on_dura=0.01, colorful=True)
-    matrix.show_snake([100, 100, 100], 0.5)
-    matrix.show_snake([0, 0, 100], 0.5)
+    #matrix.show_snake([100, 100, 100], 0.5)
+    #matrix.show_snake([0, 0, 100], 0.5)
     # matrix.fill([10, 0, 0])
+    matrix.show_comets([100, 0, 0], 10)
+    matrix.show_comets([0, 100, 0], 10)
+    matrix.show_comets([0, 0, 100], 10)
     
 
 
