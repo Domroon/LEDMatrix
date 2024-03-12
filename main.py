@@ -207,6 +207,29 @@ class Matrix:
             time.sleep(loop_duration)
             x += 1
             self.clear()
+
+    def fill_in_pieces(self, color, duration):
+        loop_duration = duration / LED_QTY
+        for i in range(LED_QTY):
+            self.np[i] = color
+            self.np.write()
+            time.sleep(loop_duration)
+
+    def tetris_point_fill(self, color, duration):
+        loop_duration = duration / LED_QTY
+        led_num = LED_QTY
+        while led_num >= 0:
+            for i in range(led_num):
+                self.np[i] = color
+                self.np.write()
+                # time.sleep(loop_duration)
+                self.np[i] = [0, 0, 0]
+                self.np.write()
+            self.np[led_num-1] = color
+            self.np.write()
+            led_num -= 1
+
+   
         
         
 def main():
@@ -224,18 +247,21 @@ def main():
     #matrix.show_comets([100, 0, 0], 10)
     #matrix.show_comets([0, 100, 0], 10)
     #matrix.show_comets([0, 0, 100], 10)
-    loop = 0
-    while loop <=2:
-        matrix.show_random_pixel_slides([0, 0, 100], 5)
-        loop += 1
-    loop = 0    
-    while loop <=2:
-        matrix.show_random_pixel_slides([0, 100, 0], 5)
-        loop += 1
-    loop = 0
-    while loop <=2:
-        matrix.show_random_pixel_slides([100, 0, 0], 5)
-        loop += 1
+    # loop = 0
+    # while loop <=2:
+    #     matrix.show_random_pixel_slides([0, 0, 100], 5)
+    #     loop += 1
+    # loop = 0    
+    # while loop <=2:
+    #     matrix.show_random_pixel_slides([0, 100, 0], 5)
+    #     loop += 1
+    # loop = 0
+    # while loop <=2:
+    #     matrix.show_random_pixel_slides([100, 0, 0], 5)
+    #     loop += 1
+    #matrix.fill_in_pieces([0, 0, 20], 1)
+    #matrix.fill_in_pieces([0, 20, 0], 1)
+    matrix.tetris_point_fill([20, 0, 0], 0.01)
     
 
 
