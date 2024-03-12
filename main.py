@@ -192,6 +192,21 @@ class Matrix:
             time.sleep(loop_duration)
             x += 1
             self.clear()
+
+    def show_random_pixel_slides(self, color, duration):
+        x = 0
+        loop_duration = (duration / LED_QTY)
+        while True:
+            if x == 16:
+                break
+            for i in range(16):
+                show = randint(0, 1)
+                if show:
+                    self.np[x+i*16] = color
+            self.np.write()
+            time.sleep(loop_duration)
+            x += 1
+            self.clear()
         
         
 def main():
@@ -206,9 +221,21 @@ def main():
     #matrix.show_snake([100, 100, 100], 0.5)
     #matrix.show_snake([0, 0, 100], 0.5)
     # matrix.fill([10, 0, 0])
-    matrix.show_comets([100, 0, 0], 10)
-    matrix.show_comets([0, 100, 0], 10)
-    matrix.show_comets([0, 0, 100], 10)
+    #matrix.show_comets([100, 0, 0], 10)
+    #matrix.show_comets([0, 100, 0], 10)
+    #matrix.show_comets([0, 0, 100], 10)
+    loop = 0
+    while loop <=2:
+        matrix.show_random_pixel_slides([0, 0, 100], 5)
+        loop += 1
+    loop = 0    
+    while loop <=2:
+        matrix.show_random_pixel_slides([0, 100, 0], 5)
+        loop += 1
+    loop = 0
+    while loop <=2:
+        matrix.show_random_pixel_slides([100, 0, 0], 5)
+        loop += 1
     
 
 
