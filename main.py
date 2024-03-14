@@ -81,9 +81,9 @@ class Matrix:
     
     def fill_colorful(self, duration):
         for i in range(LED_QTY):
-            rand1 = randint(0, 50)
-            rand2 = randint(0, 50)
-            rand3 = randint(0, 50)
+            rand1 = randint(0, 10)
+            rand2 = randint(0, 10)
+            rand3 = randint(0, 10)
             self.np[i] = [rand1, rand2, rand3]
         self.np.write()
         time.sleep(duration)
@@ -95,7 +95,6 @@ class Matrix:
         for i in range(3):
             if fade_to_color[i] > 0:
                 fade_to_color[i] = 1
-        print("first: ", fade_to_color)
         while True:
             if loops == steps:
                 break
@@ -105,7 +104,6 @@ class Matrix:
                 elif current_color[i] > 0:
                     current_color[i] -= 1
                 mixed_color[i] = current_color[i] + fade_to_color[i]
-            print(mixed_color)
             for i in range(0, LED_QTY):
                 self.np[i] = mixed_color
             time.sleep(step_duration)
@@ -301,6 +299,18 @@ def fade_pixels_in_and_out(matrix):
     matrix.flash_random([0, 0, 0], 10, clear=False, on_dura=0.01)
 
 
+def show_pixel_noise(matrix):
+    for _ in range(200):
+        matrix.fill_colorful(0.04)
+
+
+def different_color_fadeing(matrix, brightness, dura_per_color):
+    matrix.color_changing([brightness, 0, 0], [0, brightness, 0], brightness, dura_per_color)
+    matrix.color_changing([0, brightness, 0], [0, 0, brightness], brightness, dura_per_color)
+    matrix.color_changing([0, 0, brightness], [brightness, 0, 0], brightness, dura_per_color)
+    matrix.color_changing([brightness, 0, 0], [0, 0, brightness], brightness, dura_per_color)
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -311,6 +321,8 @@ def main():
     # fade_different_colors(matrix, 10, 2)
     # show_different_checkered(matrix)
     # fade_pixels_in_and_out(matrix)
+    # show_pixel_noise(matrix)
+    # different_color_fadeing(matrix, 20, 5)
 
     # matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
     # matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
