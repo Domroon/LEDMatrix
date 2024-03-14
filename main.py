@@ -318,6 +318,29 @@ def show_sweep_different_colors(matrix, duration_per_color):
     matrix.show_one_bus_sweep([255, 255, 255], duration_per_color)
 
 
+def show_squares(matrix, duration_per_square, loops):
+    color = [10, 0, 0]
+    for _ in range(loops):
+        matrix.show_square(1, 1, color, duration_per_square)
+        matrix.show_square(0, 0, color, duration_per_square)
+        matrix.show_square(0, 1, color, duration_per_square)
+        matrix.show_square(1, 0, color, duration_per_square)
+        
+        
+    color = [0, 0, 10]
+    for _ in range(loops):
+        matrix.show_square(0, 0, color, duration_per_square)
+        matrix.show_square(1, 0, color, duration_per_square)
+        matrix.show_square(1, 1, color, duration_per_square)
+        matrix.show_square(0, 1, color, duration_per_square)
+    color = [0, 10, 0]
+    for _ in range(loops):
+        matrix.show_square(0, 1, color, duration_per_square)
+        matrix.show_square(1, 1, color, duration_per_square)
+        matrix.show_square(1, 0, color, duration_per_square)
+        matrix.show_square(0, 0, color, duration_per_square)
+        
+        
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -330,7 +353,8 @@ def main():
     # fade_pixels_in_and_out(matrix)
     # show_pixel_noise(matrix)
     # different_color_fadeing(matrix, 20, 5)
-    show_sweep_different_colors(matrix, 0.1)
+    # show_sweep_different_colors(matrix, 0.1)
+    show_squares(matrix, 0.1, 10)
 
     # matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
     # matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
