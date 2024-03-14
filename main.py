@@ -287,6 +287,20 @@ def show_different_checkered(matrix):
     matrix.clear()
 
 
+def fade_pixels_in_and_out(matrix):
+    matrix.flash_random([20, 20, 20], 10, clear=False, on_dura=0.01)
+    matrix.flash_random([0, 0, 0], 10, clear=False, on_dura=0.01)
+    
+    matrix.flash_random([20, 0, 0], 10, clear=False, on_dura=0.01)
+    matrix.flash_random([0, 0, 0], 10, clear=False, on_dura=0.01)
+
+    matrix.flash_random([0, 20, 0], 10, clear=False, on_dura=0.01)
+    matrix.flash_random([0, 0, 0], 10, clear=False, on_dura=0.01)
+
+    matrix.flash_random([0, 0, 20], 10, clear=False, on_dura=0.01)
+    matrix.flash_random([0, 0, 0], 10, clear=False, on_dura=0.01)
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -295,7 +309,8 @@ def main():
     input("Press enter for start")
     # flash_in_different_colors(matrix)
     # fade_different_colors(matrix, 10, 2)
-    show_different_checkered(matrix)
+    # show_different_checkered(matrix)
+    # fade_pixels_in_and_out(matrix)
 
     # matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
     # matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
