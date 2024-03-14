@@ -259,13 +259,24 @@ def flash_in_different_colors(matrix):
     matrix.flash_random(COLOR["white"], 1, on_dura=0.01, colorful=True)
 
 
+def fade_different_colors(matrix, brightness, single_duration):
+    matrix.fade_in([brightness, 0, 0], brightness, single_duration)
+    matrix.fade_in([brightness, 0, 0], brightness, single_duration, reverse=True)
+    matrix.fade_in([0, brightness, 0], brightness, single_duration)
+    matrix.fade_in([0, brightness, 0], brightness, single_duration, reverse=True)
+    matrix.fade_in([0, 0, brightness], brightness, single_duration)
+    matrix.fade_in([0, 0, brightness], brightness, single_duration, reverse=True)
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
     matrix = Matrix(pin, np)
     matrix.clear()
     input("Press enter for start")
-    flash_in_different_colors(matrix)
+    # flash_in_different_colors(matrix)
+    fade_different_colors(matrix, 10, 2)
+
     # matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
     # matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
     # matrix.flash_random([0, 0, 20], 2, on_dura=0.01, colorful=True)
