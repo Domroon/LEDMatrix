@@ -346,47 +346,29 @@ def main():
     np = NeoPixel(pin, LED_QTY)  
     matrix = Matrix(pin, np)
     matrix.clear()
+
     input("Press enter for start")
-    # flash_in_different_colors(matrix)
-    # fade_different_colors(matrix, 10, 2)
-    # show_different_checkered(matrix)
-    # fade_pixels_in_and_out(matrix)
-    # show_pixel_noise(matrix)
-    # different_color_fadeing(matrix, 20, 5)
-    # show_sweep_different_colors(matrix, 0.1)
-    show_squares(matrix, 0.1, 10)
 
-    # matrix.flash_random([0, 0, 20], 5, on_dura=0.5, colorful=True)
-    # matrix.flash_random([0, 0, 20], 4, on_dura=0.05, colorful=True)
-    # matrix.flash_random([0, 0, 20], 2, on_dura=0.01, colorful=True)
-    #matrix.show_snake([100, 100, 100], 0.5)
-    #matrix.show_snake([0, 0, 100], 0.5)
-    # matrix.fill([10, 0, 0])
-    #matrix.show_comets([100, 0, 0], 10)
-    #matrix.show_comets([0, 100, 0], 10)
-    #matrix.show_comets([0, 0, 100], 10)
-    # loop = 0
-    # while loop <=2:
-    #     matrix.show_random_pixel_slides([0, 0, 100], 5)
-    #     loop += 1
-    # loop = 0    
-    # while loop <=2:
-    #     matrix.show_random_pixel_slides([0, 100, 0], 5)
-    #     loop += 1
-    # loop = 0
-    # while loop <=2:
-    #     matrix.show_random_pixel_slides([100, 0, 0], 5)
-    #     loop += 1
-    #matrix.fill_in_pieces([0, 0, 20], 1)
-    #matrix.fill_in_pieces([0, 20, 0], 1)
-    #matrix.tetris_line_fill([20, 0, 0], 1)
-    #matrix.clear()
-    #matrix.tetris_line_fill([0, 20, 0], 1)
-    #matrix.clear()
-    #matrix.tetris_line_fill([0, 0, 20], 1)
-    #matrix.clear()
+    while True:
+        random_number = randint(1, 8)
+        print("Show Animation Number :", random_number)
+        if random_number == 1:
+            flash_in_different_colors(matrix),
+        elif random_number == 2:
+            fade_different_colors(matrix, 10, 2),
+        elif random_number == 3:
+            show_different_checkered(matrix),
+        elif random_number == 4:
+            fade_pixels_in_and_out(matrix),
+        elif random_number == 5:
+            show_pixel_noise(matrix),
+        elif random_number == 6:
+            different_color_fadeing(matrix, 20, 5),
+        elif random_number == 7:
+            show_sweep_different_colors(matrix, 0.1),
+        elif random_number == 8:
+            show_squares(matrix, 0.1, 10)
+
     
-
-
 if __name__ == '__main__':
     main()
