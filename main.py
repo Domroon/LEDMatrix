@@ -151,21 +151,14 @@ class Matrix:
         time.sleep(duration)
         self.clear()
 
-    def show_snake(self, color, duration):
-        color2 = [int(color[0]/2), int(color[1]/2), int(color[2]/2)]
-        color3 = [int(color[0]/4), int(color[1]/4), int(color[2]/4)]
-        color4 = [int(color[0]/8), int(color[1]/8), int(color[2]/8)]
-        color5 = [int(color[0]/16), int(color[1]/16), int(color[2]/16)]
+    def show_snake(self, color, length, duration):
         x = 0
         loop_duration = (duration / LED_QTY)
         while True:
-            if x == 256 - 4:
+            if x == 256 - length:
                 break
-            self.np[x+0] = color5
-            self.np[x+1] = color4
-            self.np[x+2] = color3
-            self.np[x+3] = color2
-            self.np[x+4] = color
+            for i in range(length):
+                self.np[x+i] = color
             self.np.write()
             time.sleep(loop_duration)
             x += 1
@@ -339,8 +332,15 @@ def show_squares(matrix, duration_per_square, loops):
         matrix.show_square(1, 1, color, duration_per_square)
         matrix.show_square(1, 0, color, duration_per_square)
         matrix.show_square(0, 0, color, duration_per_square)
-        
-        
+
+
+def show_snakes(matrix, length, duration_per_snake):
+    matrix.show_snake([20, 20, 20], length, duration_per_snake)
+    matrix.show_snake([20, 0, 0], length, duration_per_snake)
+    matrix.show_snake([0, 20, 0], length, duration_per_snake)
+    matrix.show_snake([0, 0, 20], length, duration_per_snake)
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -350,7 +350,7 @@ def main():
     input("Press enter for start")
 
     while True:
-        random_number = randint(1, 8)
+        random_number = randint(1, 9)
         print("Show Animation Number :", random_number)
         if random_number == 1:
             flash_in_different_colors(matrix),
@@ -368,6 +368,8 @@ def main():
             show_sweep_different_colors(matrix, 0.1),
         elif random_number == 8:
             show_squares(matrix, 0.1, 10)
+        elif random_number == 9:
+            show_snakes(matrix, 20, 0.1)
 
     
 if __name__ == '__main__':
