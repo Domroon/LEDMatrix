@@ -341,6 +341,29 @@ def show_snakes(matrix, length, duration_per_snake):
     matrix.show_snake([0, 0, 20], length, duration_per_snake)
 
 
+def show_colorful_comets(matrix, loops):
+    for _ in range(loops):
+        matrix.show_comets([100, 0, 0], 1)
+
+    for _ in range(loops):
+        matrix.show_comets([0, 100, 0], 1)
+
+    for _ in range(loops):
+        matrix.show_comets([0, 0, 100], 1)
+
+    for _ in range(loops):
+        matrix.show_comets([100, 0, 0], 10)
+        matrix.show_comets([0, 100, 0], 10)
+        matrix.show_comets([0, 0, 100], 10)
+
+    for _ in range(loops):
+        matrix.show_comets([100, 0, 0], 1)
+        matrix.show_comets([0, 100, 0], 1)
+        matrix.show_comets([0, 0, 100], 1)
+
+    
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -348,9 +371,10 @@ def main():
     matrix.clear()
 
     input("Press enter for start")
+    
 
     while True:
-        random_number = randint(1, 9)
+        random_number = randint(1, 10)
         print("Show Animation Number :", random_number)
         if random_number == 1:
             flash_in_different_colors(matrix),
@@ -370,6 +394,8 @@ def main():
             show_squares(matrix, 0.1, 10)
         elif random_number == 9:
             show_snakes(matrix, 20, 0.1)
+        elif random_number == 10:
+            show_colorful_comets(matrix, 10)
 
     
 if __name__ == '__main__':
