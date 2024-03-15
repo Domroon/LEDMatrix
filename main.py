@@ -377,6 +377,13 @@ def show_colorful_slides(matrix):
         loop += 1
 
 
+def show_color_swap(matrix):
+    matrix.fill_in_pieces([10, 10, 10], 5)
+    matrix.fill_in_pieces([10, 0, 0], 5)
+    matrix.fill_in_pieces([10, 0, 10], 5)
+    matrix.fill_in_pieces([0, 10, 10], 5)
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -386,7 +393,7 @@ def main():
     input("Press enter for start")
 
     while True:
-        random_number = randint(1, 10)
+        random_number = randint(1, 12)
         print("Show Animation Number :", random_number)
         if random_number == 1:
             flash_in_different_colors(matrix),
@@ -410,6 +417,8 @@ def main():
             show_colorful_comets(matrix, 10)
         elif random_number == 11:
             show_colorful_slides(matrix)
+        elif random_number == 12:
+            show_color_swap(matrix)
 
     
 if __name__ == '__main__':
