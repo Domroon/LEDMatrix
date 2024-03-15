@@ -362,6 +362,19 @@ def show_colorful_comets(matrix, loops):
         matrix.show_comets([0, 0, 100], 1)
 
     
+def show_colorful_slides(matrix):
+    loop = 0
+    while loop <=5:
+        matrix.show_random_pixel_slides([0, 0, 100], 5)
+        loop += 1
+    loop = 0    
+    while loop <=5:
+        matrix.show_random_pixel_slides([0, 100, 0], 5)
+        loop += 1
+    loop = 0
+    while loop <=5:
+        matrix.show_random_pixel_slides([100, 0, 0], 5)
+        loop += 1
 
 
 def main():
@@ -371,7 +384,6 @@ def main():
     matrix.clear()
 
     input("Press enter for start")
-    
 
     while True:
         random_number = randint(1, 10)
@@ -396,6 +408,8 @@ def main():
             show_snakes(matrix, 20, 0.1)
         elif random_number == 10:
             show_colorful_comets(matrix, 10)
+        elif random_number == 11:
+            show_colorful_slides(matrix)
 
     
 if __name__ == '__main__':
