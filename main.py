@@ -383,6 +383,16 @@ def show_color_swap(matrix):
     matrix.fill_in_pieces([0, 10, 10], 5)
 
 
+def show_tetris_lines(matrix):
+    matrix.tetris_line_fill([20, 0, 20], 4)
+    matrix.tetris_line_fill([10, 10, 10], 4)
+    matrix.tetris_line_fill([20, 20, 0], 3)
+    matrix.tetris_line_fill([0, 0, 20], 2)
+    matrix.tetris_line_fill([20, 20, 20], 1)
+    matrix.tetris_line_fill([0, 20, 0], 1)
+    matrix.tetris_line_fill([10, 10, 10], 1)
+
+
 def main():
     pin = Pin(14, Pin.OUT)   # 
     np = NeoPixel(pin, LED_QTY)  
@@ -392,7 +402,7 @@ def main():
     input("Press enter for start")
 
     while True:
-        random_number = randint(1, 13)
+        random_number = randint(1, 14)
         print("Show Animation Number :", random_number)
         if random_number == 1:
             flash_in_different_colors(matrix),
@@ -420,6 +430,8 @@ def main():
             show_color_swap(matrix)
         elif random_number == 13:
             matrix.tetris_point_fill([10, 10, 10], 0.1)
+        elif random_number == 14:
+            show_tetris_lines(matrix)
 
     
 if __name__ == '__main__':
