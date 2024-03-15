@@ -211,10 +211,9 @@ class Matrix:
         loop_duration = duration / LED_QTY
         led_num = LED_QTY
         while led_num >= 0:
-            for i in range(led_num):
+            for i in range(0, led_num, 10):
                 self.np[i] = color
                 self.np.write()
-                # time.sleep(loop_duration)
                 self.np[i] = [0, 0, 0]
                 self.np.write()
             self.np[led_num-1] = color
@@ -393,7 +392,7 @@ def main():
     input("Press enter for start")
 
     while True:
-        random_number = randint(1, 12)
+        random_number = randint(1, 13)
         print("Show Animation Number :", random_number)
         if random_number == 1:
             flash_in_different_colors(matrix),
@@ -419,6 +418,8 @@ def main():
             show_colorful_slides(matrix)
         elif random_number == 12:
             show_color_swap(matrix)
+        elif random_number == 13:
+            matrix.tetris_point_fill([10, 10, 10], 0.1)
 
     
 if __name__ == '__main__':
